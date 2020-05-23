@@ -60,6 +60,8 @@ main {
 
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  /* height: 20rem; */
+  /* width: 30rem; */
 }
 
 .card__header,
@@ -76,6 +78,8 @@ main {
 
 .card__image {
   width: 100%;
+  align-items: center;
+  margin: auto;
 }
 
 .card__image img {
