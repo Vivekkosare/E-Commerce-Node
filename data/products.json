@@ -1,1 +1,1 @@
-[{"title":"hey"},{"title":"hey"},{"title":"hello again"},{"title":"Fourth book"}]
+[{"id":"12345","title":"Pro Asp.Net Core 3","imageUrl":"https://s2.adlibris.com/images/54775577/pro-aspnet-core-3.jpg","description":"60.5","price":"Learn Asp.Net core development"},{"title":"Node.js 8 the Right Way","imageUrl":"https://s1.adlibris.com/images/29943676/nodejs-8-the-right-way.jpg","description":"27.3","price":"Create modern web services"},{"title":"Basket","imageUrl":"https://jooinn.com/images/basket-1.png","description":"A new basket","price":"12.3","id":"0"}]
