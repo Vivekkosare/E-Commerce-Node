@@ -12,21 +12,18 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
-exports.getProduct = (req, res, next) =>{
+exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
-    Product.findById(prodId, product =>{
-      //  console.log(product);
-      res.render('shop/product-detail', {
-          product: product,
-          pageTitle: product.title,
-          path:'/products'
+    Product.findById(prodId, product => {
+        res.render('shop/product-detail', {
+            product: product,
+            pageTitle: product.title,
+            path: '/products'
         });
     });
-    //res.redirect('/');
 }
 
 exports.getIndex = (req, res, next) => {
-    // const products = Product.fetchAll();
     Product.fetchAll(products => {
         res.render('shop/index', {
             prods: products,
@@ -37,18 +34,34 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-    res.render('shop/cart', {
-        pageTitle: 'Your Cart',
-        path: '/cart'
-    })
+    Cart.getCart(cart => {
+        Product.fetchAll(products => {
+            cartProducts = [];
+            products.forEach(product => {
+                const cartProductData = cart.products.find(prod => prod.id === product.id);
+                if (cartProductData) {
+                    cartProducts.push({ productData: product, qty: cartProductData.qty });
+                }
+            });
+            res.render('shop/cart', {
+                pageTitle: 'Your Cart',
+                path: '/cart',
+                products: cartProducts
+            });
+        });
+    });
 };
 
 exports.postCart = (req, res, next) => {
     const prodId = req.body.productId;
-    Product.findById(prodId, (product) =>{
+    Product.findById(prodId, (product) => {
         Cart.addProduct(prodId, product.price);
     });
     res.redirect('/cart');
+};
+
+exports.postCartDeleteProduct = (req, res, next) =>{
+    const prodId = req.body.productId;
 };
 
 exports.getOrders = (req, res, next) => {
@@ -59,7 +72,6 @@ exports.getOrders = (req, res, next) => {
 };
 
 exports.getCheckOut = (req, res, next) => {
-    console.log('checkout');
     res.render('shop/checkout', {
         path: '/checkout',
         title: 'Checkout'
